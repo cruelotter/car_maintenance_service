@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Maintenance Service</title>
+</head>
+<body>
+    <h1>Total Revenue per Month</h1>
+    <div id="total-revenue"></div>
+
+    <script>
+        fetch('/total_revenue_per_month')
+            .then(response => response.json())
+            .then(data => {
+                const totalRevenueDiv = document.getElementById('total-revenue');
+                data.forEach(entry => {
+                    const month = entry.month < 10 ? '0' + entry.month : entry.month;
+                    const formattedDate = `${entry.year}-${month}`;
+                    totalRevenueDiv.innerHTML += `<p>${formattedDate}: $${entry.total_revenue}</p>`;
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
