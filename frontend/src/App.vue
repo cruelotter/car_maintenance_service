@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 
 const pictures = ref();
+const services = ref();
 
 onMounted(() => {
   fetch('http://127.0.0.1:5000/pics')
@@ -13,7 +14,7 @@ onMounted(() => {
   fetch('http://127.0.0.1:5000/getdb')
       .then(response => response.json())
       .then(data => {
-        pictures.value = data;
+        services.value = data;
       })})
 
 
@@ -66,28 +67,13 @@ onMounted(() => {
       <div class="mb-3 w-100">
         <div class="row mb-5 w-100">
           <div class="col-4 themed-grid-col">Название услуги</div>
-          <div class="col-4 themed-grid-col">Тип услуги</div>
+          <div class="col-4 themed-grid-col">Описание</div>
           <div class="col-4 themed-grid-col">Стоимость</div>
         </div>
-        <div class="row mb-5 w-100">
-          <div class="col-4 themed-grid-col">Клининг</div>
-          <div class="col-4 themed-grid-col">Внутренний</div>
+        <div v-for="serv in services" :key="serv[0]" class="row mb-5 w-100">
+          <div class="col-4 themed-grid-col">{{ serv[1] }}</div>
+          <div class="col-4 themed-grid-col">{{ serv[2] }}</div>
           <div class="col-4 themed-grid-col">100 рублей</div>
-        </div>
-        <div class="row mb-5 w-100">
-          <div class="col-4 themed-grid-col">Название услуги</div>
-          <div class="col-4 themed-grid-col">Тип услуги</div>
-          <div class="col-4 themed-grid-col">Стоимость</div>
-        </div>
-        <div class="row mb-5 w-100">
-          <div class="col-4 themed-grid-col">Название услуги</div>
-          <div class="col-4 themed-grid-col">Тип услуги</div>
-          <div class="col-4 themed-grid-col">Стоимость</div>
-        </div>
-        <div class="row mb-5 w-100">
-          <div class="col-4 themed-grid-col">Название услуги</div>
-          <div class="col-4 themed-grid-col">Тип услуги</div>
-          <div class="col-4 themed-grid-col">Стоимость</div>
         </div>
       </div>
     </div>

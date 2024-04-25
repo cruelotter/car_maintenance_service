@@ -20,10 +20,13 @@
 
 from flask import Flask, jsonify, render_template, after_this_request
 from flask_redis import FlaskRedis
+from flask_cors import CORS
 import psycopg2
 
 
 app = Flask(__name__)
+CORS(app)
+
 # Configure your Redis URI
 app.config['REDIS_URL'] = "redis://localhost:6379/0"
 
@@ -39,7 +42,7 @@ def hello():
     data = redis_client.lrange('pics', 0, -1)
     return [d.decode("utf-8") for d in data]
 
-@app.route('/getbd')
+@app.route('/getdb')
 def index():
     # Connect to the database
         conn = psycopg2.connect(database="postgres",
@@ -61,12 +64,6 @@ def index():
         # close the cursor and connection
         cur.close()
         conn.close()
-
-        @after_this_request
-            def add_header(response):
-                response.headers.add('Access-Control-Allow-Origin', '*')
-                return response
-
         return data
 
 def total_revenue_per_month():
