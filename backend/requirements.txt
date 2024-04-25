@@ -1,2 +1,4 @@
+psycopg2
 Flask
-pyodbc
+flask_redis
+flask_cors
