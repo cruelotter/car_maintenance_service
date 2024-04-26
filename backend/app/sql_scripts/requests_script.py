@@ -1,23 +1,44 @@
+# ----------------------------------------ORDERS--------------------------------------
+orders = """--sql
+select 
+    a.appointment_id,
+    a.date,
+    a.time,
+    c.name as customer_name,
+    c.contact_information,
+    v.vehicle_id,
+    v.make,
+    v.model,
+    v.vin,
+    s.name as service_name
+from appointments a
+join customers c on c.customer_id = a.customer_id
+join vehicles v on v.vehicle_id = a.vehicle_id
+join services s on s.service_id = a.service_id
+"""
+
+
+# ----------------------------------------DASHBOARDS-----------------------------------
 # 1 report on total revenue per month
 total_revenue_per_month = """--sql
 select
-    year(i.date) as year,
-    month(i.date) as month,
-    sum(i.totalcost) as total_revenue
+    extract(year from i.date) as year,
+    extract(month from i.date) as month,
+    sum(i.total_cost) as total_revenue
 from
     invoices i
 group by
-    year(i.date),
-    month(i.date)
+    extract(year from i.date),
+    extract(month from i.date)
 order by
-    year(i.date),
-    month(i.date);
+    extract(year from i.date),
+    extract(month from i.date);
 """
 
 # 2 report on most popular services
 report_on_most_popular_services = """--sql
 select
-    s.name as servic_ename,
+    s.name as service_name,
     count(*) as total_appointments
 from
     appointments a

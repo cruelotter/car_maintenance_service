@@ -1,62 +1,81 @@
 <script setup>
-import {onMounted, ref} from "vue";
 import HeaderTop from "@/components/HeaderTop";
+import store from '@/store/index';
 
-const pictures = ref();
-const services = ref();
+const dashboards1 = [
+  {
+    name: 'Report on total revenue per month',
+    description: 'Report on total revenue per month description',
+    id: 0
+  },
+  {
+    name: 'Report on most popular services',
+    description: 'Report on most popular services description',
+    id: 1
+  },
+  {
+    name: 'Report on technician performance',
+    description: 'Report on technician performance description',
+    id: 2
+  },
+]
 
-onMounted(() => {
-  fetch('http://127.0.0.1:5000/pics')
-      .then(response => response.json())
-      .then(data => {
-        pictures.value = data;
-      });
+const dashboards2 = [
+  {
+    name: 'Report on total revenue per month',
+    description: 'Report on total revenue per month description',
+    id: 3
+  },
+  {
+    name: 'Report on most popular services',
+    description: 'Report on most popular services description',
+    id: 4
+  },
+  {
+    name: 'Report on technician performance',
+    description: 'Report on technician performance description',
+    id: 5
+  },
+]
 
-  fetch('http://127.0.0.1:5000/getdb')
-      .then(response => response.json())
-      .then(data => {
-        services.value = data;
-      })})
+const changeDash = (id) => {
+    store.commit('setPage', 'dashboard-component');
+    store.commit('setDashId', id);
+}
 </script>
 
 <template>
   <HeaderTop />
-  <h2 class="mt-4">Car maintenance service</h2>
-  <p>Описать, как это вообще все на сайте работает</p>
+  <h2 class="mt-4 fw-bols mb-5">Dashboards</h2>
+  <p class="mb-5">Get reports on different spheres</p>
 
-  <div class="d-flex mt-5 ms-5 me-5">
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-      <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-          <a href="#" class="nav-link active" aria-current="page">
-            Services
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link link-dark">
-            Dashboard
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link link-dark">
-            Orders
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="mb-3 w-100">
-      <div class="row mb-5 w-100">
-        <div class="col-4 themed-grid-col">Название услуги</div>
-        <div class="col-4 themed-grid-col">Описание</div>
-        <div class="col-4 themed-grid-col">Стоимость</div>
-      </div>
-      <div v-for="serv in services" :key="serv[0]" class="row mb-5 w-100">
-        <div class="col-4 themed-grid-col">{{ serv[1] }}</div>
-        <div class="col-4 themed-grid-col">{{ serv[2] }}</div>
-        <div class="col-4 themed-grid-col">100 рублей</div>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center ms-5 me-5">
+      <div v-for="(dash, idx) in dashboards1" :key="idx" class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title mb-3">{{ dash.name }}</h1>
+            <div class="mb-3">{{ dash.description }}</div>
+            <button @click="changeDash(dash.id)" type="button" class="w-50 btn btn-lg btn-outline-primary">Explore</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center ms-5 me-5">
+      <div v-for="(dash, idx) in dashboards2" :key="idx" class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title mb-3">{{ dash.name }}</h1>
+            <div class="mb-3">{{ dash.description }}</div>
+            <button @click="changeDash(dash.id)" type="button" class="w-50 btn btn-lg btn-outline-primary">Explore</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>
 
 

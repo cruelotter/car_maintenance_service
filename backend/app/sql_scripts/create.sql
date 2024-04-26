@@ -20,7 +20,7 @@ create table vehicles (
 );
 
 -- 3 Services
-CREATE TABLE Services (
+CREATE TABLE services (
     service_id integer,
     name text,
     description text,
@@ -28,7 +28,7 @@ CREATE TABLE Services (
 );
 
 -- 4 Appointments table
-CREATE TABLE Appointments (
+CREATE TABLE appointments (
     appointment_id integer,
     date date,
     time time,
@@ -36,9 +36,9 @@ CREATE TABLE Appointments (
     vehicle_id integer,
     service_id integer,
  PRIMARY KEY(appointment_id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
-    FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id),
-    FOREIGN KEY (service_id) REFERENCES Services(service_id)
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY (vehicle_id) REFERENCES vehicles(vehicle_id),
+    FOREIGN KEY (service_id) REFERENCES services(service_id)
 );
 
 -- 5 Technicians table ----------------------------------------Document-Oriented

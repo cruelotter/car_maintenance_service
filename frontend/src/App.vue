@@ -4,6 +4,7 @@ import SignIn from './pages/SignIn';
 import MainPage from './pages/MainPage';
 import DashBoard from './pages/DashBoard';
 import OrderCustomer from './pages/OrderCustomer';
+import DashComponent from './pages/DashComponent';
 
 import store from '@/store/index';
 
@@ -13,7 +14,7 @@ import store from '@/store/index';
     <MainPage v-if="store.state.page === 'main'" />
     <DashBoard v-if="store.state.page === 'dashboard'" />
     <OrderCustomer v-if="store.state.page === 'orders'" />
-
+    <DashComponent v-if="store.state.page === 'dashboard-component'" />
 </template>
 
 <style>
