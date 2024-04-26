@@ -1,3 +1,24 @@
+# ----------------------------------------ORDERS--------------------------------------
+orders = """--sql
+select 
+    a.appointment_id,
+    a.date,
+    a.time,
+    c.name as customer_name,
+    c.contact_information,
+    v.vehicle_id,
+    v.make,
+    v.model,
+    v.vin,
+    s.name as service_name
+from appointments a
+join customers c on c.customer_id = a.customer_id
+join vehicles v on v.vehicle_id = a.vehicle_id
+join services s on s.service_id = a.service_id
+"""
+
+
+# ----------------------------------------DASHBOARDS-----------------------------------
 # 1 report on total revenue per month
 total_revenue_per_month = """--sql
 select

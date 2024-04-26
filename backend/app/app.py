@@ -35,27 +35,38 @@ def index():
 @app.route('/dashboards/total_revenue_per_month', methods=['GET'])
 def get_dashboard(name):
     data = postgres_client.get_dashboard_data(rs.total_revenue_per_month)
+    return data
 
 
 @app.route('/dashboards/report_on_most_popular_services', methods=['GET'])
 def get_dashboard(name):
     data = postgres_client.get_dashboard_data(rs.report_on_most_popular_services)
+    return data
 
 
 @app.route('/dashboards/report_on_technician_performance', methods=['GET'])
 def get_dashboard(name):
     data = postgres_client.get_dashboard_data(rs.report_on_technician_performance)
+    return data
 
 
 @app.route('/dashboards/report_on_inventory_status', methods=['GET'])
 def get_dashboard(name):
     data = postgres_client.get_dashboard_data(rs.report_on_inventory_status)
+    return data
 
 
 @app.route('/dashboards/report_on_customer_feedback', methods=['GET'])
 def get_dashboard(name):
     data = postgres_client.get_dashboard_data(rs.report_on_customer_feedback)
+    return data
 
+@app.route('/orders', methods=['GET'])
+def get_dashboard(name):
+    data = postgres_client.get_dashboard_data(rs.orders)
+
+    ## кудо-то сюда еще картинки бы, чтоб вместе с заказами
+    return data
 
 
 # вот это надо переименовать !!!!!!
