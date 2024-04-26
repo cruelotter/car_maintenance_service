@@ -1,4 +1,4 @@
-from database import CarMaintenanceService
+from app.database import CarMaintenanceService
 
 
 if __name__=='__main__':

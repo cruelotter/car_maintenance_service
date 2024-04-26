@@ -34,29 +34,35 @@ class CarMaintenanceService:
 
 
     def create_tabels(self):
-        with open('backend\sql_scripts\create.sql', 'r') as f:
+        with open('app\sql_scripts\create.sql', 'r') as f:
             script = f.read()
             self.cursor.execute(script)
             print('tables created successfully')
 
 
     def fill_tables(self):
-        with open('backend\sql_scripts\insert.sql', 'r') as f:
+        with open('app\sql_scripts\insert.sql', 'r') as f:
             script = f.read()
             self.cursor.execute(script)
             print('values inserted successfully')
 
     def create_roles(self):
-        with open('backend\sql_scripts\roles.sql', 'r') as f:
+        with open('app\sql_scripts\roles.sql', 'r') as f:
             script = f.read()
             self.cursor.execute(script)
             print('roles created successfully')
+        self.cursor.
 
 
-    def get_data(self, table_name):
+    def get_table_data(self, table_name):
         self.cursor.execute(f'select * from {table_name}')
         data = self.cursor.fetchall()
         print(data)
+        return data
+    
+    def get_dashboard_data(self, script):
+        self.cursor.execute(script)
+        data = self.cursor.fetchall()
         return data
     
 

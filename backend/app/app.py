@@ -4,6 +4,7 @@ from flask_cors import CORS
 import psycopg2
 
 from database import CarMaintenanceService
+from sql_scripts import requests_script as rs
 
 app = Flask(__name__)
 CORS(app)
@@ -28,10 +29,36 @@ def hello():
 
 @app.route('/getdb')
 def index():
-    data = postgres_client.get_data('vehicles')
+    data = postgres_client.get_data('services')
     return data
 
+@app.route('/dashboards/total_revenue_per_month', methods=['GET'])
+def get_dashboard(name):
+    data = postgres_client.get_dashboard_data(rs.total_revenue_per_month)
 
+
+@app.route('/dashboards/report_on_most_popular_services', methods=['GET'])
+def get_dashboard(name):
+    data = postgres_client.get_dashboard_data(rs.report_on_most_popular_services)
+
+
+@app.route('/dashboards/report_on_technician_performance', methods=['GET'])
+def get_dashboard(name):
+    data = postgres_client.get_dashboard_data(rs.report_on_technician_performance)
+
+
+@app.route('/dashboards/report_on_inventory_status', methods=['GET'])
+def get_dashboard(name):
+    data = postgres_client.get_dashboard_data(rs.report_on_inventory_status)
+
+
+@app.route('/dashboards/report_on_customer_feedback', methods=['GET'])
+def get_dashboard(name):
+    data = postgres_client.get_dashboard_data(rs.report_on_customer_feedback)
+
+
+
+# вот это надо переименовать !!!!!!
 def total_revenue_per_month():
     data = redis_client.get('pics')
     return jsonify([u.to_json() for u in data])
