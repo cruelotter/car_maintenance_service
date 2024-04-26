@@ -7,10 +7,11 @@ if __name__=='__main__':
     s.fill_tables()
     s.create_roles()
 
-    data = s.get_data('customers')
+    data = s.get_table_data('customers')
     if len(data)>0:
+        print(data)
         print('It works!')
     else: 
-        print('Something is wrong')
-        
+        print('Something is wrong') 
+
     s.close_connection()

@@ -31,7 +31,7 @@ CREATE TABLE services (
 CREATE TABLE appointments (
     appointment_id integer,
     date date,
-    time time,
+    time text,
     customer_id integer,
     vehicle_id integer,
     service_id integer,
@@ -56,8 +56,8 @@ CREATE TABLE maintenance_records (
     date date,
     description text,
  PRIMARY KEY(record_id),
-    FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id),
-    FOREIGN KEY (technician_id) REFERENCES Technicians(technician_id)
+    FOREIGN KEY (vehicle_id) REFERENCES vehicles(vehicle_id),
+    FOREIGN KEY (technician_id) REFERENCES technicians(technician_id)
 );
 
 -- 7 Parts Inventory table
@@ -70,13 +70,13 @@ CREATE TABLE parts_inventory (
 );
 
 -- 8 Invoices table
-CREATE TABLE Invoices (
+CREATE TABLE invoices (
     invoice_id integer,
     appointment_id integer,
     total_cost decimal,
     date date,
  PRIMARY KEY(invoice_id),
-    FOREIGN KEY (appointment_id) REFERENCES Appointments(appointment_id)
+    FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id)
 );
 
 -- 9 Feedback/Ratings table
@@ -87,8 +87,8 @@ CREATE TABLE feedback_ratings (
     rating integer,
     comments text,
  PRIMARY KEY(feedback_id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
-    FOREIGN KEY (technician_id) REFERENCES Technicians(technician_id)
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY (technician_id) REFERENCES technicians(technician_id)
 );
 
 -- 10 Warranty Information table
@@ -97,9 +97,9 @@ CREATE TABLE warranty_information (
     vehicle_id integer,
     provider text,
     coverage_details text,
-    expiration_date timestamp,
+    expiration_date textstamp,
  PRIMARY KEY(warranty_id),
-    FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id)
+    FOREIGN KEY (vehicle_id) REFERENCES vehicles(vehicle_id)
 );
 
 -- 11 Supplier Information table--------------------Document-Oriented
@@ -146,6 +146,28 @@ CREATE TABLE payment_transactions (
     payment_date timestamp,
     amount decimal,
     payment_method text,
- PRIMARY KEY(transaction_id),
+    PRIMARY KEY(transaction_id),
     FOREIGN KEY (invoice_id) REFERENCES Invoices(invoice_id)
 );
+
+create table users(
+    user_id integer,
+    technician_id integer,
+    login text,
+    password text,
+    role integer,
+    primary key (user_id),
+    foreign key (technician_id) references technicians(technician_id)
+);
+
+create table users_relations(
+    id integer,
+    subordinate integer,
+    manager integer,
+    primary key(id),
+    FOREIGN KEY (subordinate) REFERENCES users(user_id),
+    FOREIGN KEY (manager) REFERENCES users(user_id)
+);
+
+
+

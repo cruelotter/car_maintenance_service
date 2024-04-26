@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, after_this_request
+from flask import Flask, jsonify, render_template, after_this_request, request
 from flask_redis import FlaskRedis
 from flask_cors import CORS
 import psycopg2
@@ -65,9 +65,20 @@ def get_dashboard_feedback():
 @app.route('/orders')
 def get_dashboard_orders():
     data = postgres_client.get_dashboard_data(rs.orders)
-
     ## кудо-то сюда еще картинки бы, чтоб вместе с заказами
     return data
+
+@app.route('/login')
+def check_credentials():
+    args = request.args
+    login = args.get('login')
+    passw = args.get('password')
+    users = postgres_client.get_table_data('users')
+    creds = {item[3]: (item[4],item[5]) for item in users}
+    if creds[login] is not None:
+        if creds[login][0] == passw:
+            return creds[login][1]
+    return -1
 
 
 # вот это надо переименовать !!!!!!
