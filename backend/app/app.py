@@ -33,6 +33,31 @@ def index():
     data = postgres_client.get_table_data('services')
     return data
 
+@app.route('/users')
+def users():
+    data = postgres_client.get_table_data('users')
+    return data
+
+@app.route('/addservice', methods=['POST'])
+def addservice():
+    if request.method == 'POST':
+        data = request.json
+        d = postgres_client.add_service([data[0], data[1], data[2], data[3]])
+    return d
+
+@app.route('/deleteservice', methods=['POST'])
+def deleteservice():
+    data = request.json
+    d = postgres_client.delete_service(data)
+    return d
+
+@app.route('/adduser', methods=['POST'])
+def adduser():
+    if request.method == 'POST':
+        data = request.json
+        d = postgres_client.add_user([data[0], data[1], data[2], data[3], data[4]])
+    return d
+
 @app.route('/dashboards/total_revenue_per_month')
 def get_dashboard_revenue():
     data = postgres_client.get_dashboard_data(rs.total_revenue_per_month)
@@ -70,15 +95,15 @@ def get_dashboard_orders():
 
 @app.route('/login')
 def check_credentials():
-    args = request.args
-    login = args.get('login')
-    passw = args.get('password')
     users = postgres_client.get_table_data('users')
-    creds = {item[3]: (item[4],item[5]) for item in users}
-    if creds[login] is not None:
-        if creds[login][0] == passw:
-            return creds[login][1]
-    return -1
+    print(users)
+    creds = [[item[2], item[3], item[4]] for item in users]
+    print(creds)
+    # if creds[login] is not None:
+    #     if creds[login][0] == passw:
+    #         return creds[login][1]
+    # return -1
+    return creds
 
 
 # вот это надо переименовать !!!!!!

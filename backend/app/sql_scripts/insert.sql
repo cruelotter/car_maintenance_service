@@ -27,18 +27,18 @@ VALUES
     (10, 'Volkswagen', 'Jetta', 2016, '10YFCY5F11DX025915', 10);
 
 -- Services table
-INSERT INTO services (service_id, name, description)
+INSERT INTO services (service_id, name, description, cost)
 VALUES
-    (1, 'Oil Change', 'Regular oil change service'),
-    (2, 'Brake Replacement', 'Replace worn brake pads and rotors'),
-    (3, 'Tire Rotation', 'Rotate tires to ensure even wear'),
-    (4, 'Engine Tune-Up', 'Inspect and tune engine components'),
-    (5, 'Wheel Alignment', 'Align wheels to ensure proper steering and handling'),
-    (6, 'Transmission Flush', 'Flush and replace transmission fluid'),
-    (7, 'Coolant Flush', 'Flush and replace engine coolant'),
-    (8, 'Battery Replacement', 'Replace worn-out car battery'),
-    (9, 'Air Filter Replacement', 'Replace dirty air filter'),
-    (10, 'Spark Plug Replacement', 'Replace worn-out spark plugs');
+    (1, 'Oil Change', 'Regular oil change service', 100),
+    (2, 'Brake Replacement', 'Replace worn brake pads and rotors', 584),
+    (3, 'Tire Rotation', 'Rotate tires to ensure even wear', 234),
+    (4, 'Engine Tune-Up', 'Inspect and tune engine components', 670),
+    (5, 'Wheel Alignment', 'Align wheels to ensure proper steering and handling', 543),
+    (6, 'Transmission Flush', 'Flush and replace transmission fluid', 555),
+    (7, 'Coolant Flush', 'Flush and replace engine coolant', 120),
+    (8, 'Battery Replacement', 'Replace worn-out car battery', 640),
+    (9, 'Air Filter Replacement', 'Replace dirty air filter', 430),
+    (10, 'Spark Plug Replacement', 'Replace worn-out spark plugs', 780);
 
 -- Service Packages table
 INSERT INTO service_packages (package_id, name, description, services_included, cost)

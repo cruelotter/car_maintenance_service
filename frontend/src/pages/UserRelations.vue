@@ -3,8 +3,6 @@ import HeaderTop from "@/components/HeaderTop";
 import {onMounted, ref} from "vue";
 
 const pics = ref([]);
-const orders = ref([]);
-
 let chosen = 0;
 
 onMounted(() => {
@@ -12,18 +10,7 @@ onMounted(() => {
       .then(response => response.json())
       .then(data => {
         pics.value = data;
-      })
-
-    fetch('http://127.0.0.1:5000/orders')
-      .then(response => response.json())
-      .then(data => {
-        orders.value = data;
-        console.log(data);
-      })
-
-    })
-
-    
+      })})
 </script>
 
 <template>
@@ -33,23 +20,15 @@ onMounted(() => {
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="7" aria-label="Slide 8"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="8" aria-label="Slide 9"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="9" aria-label="Slide 10"></button>
-
     </div>
     <div class="carousel-inner">
-      <div v-for="(items, idx) in orders" :key="idx" class="carousel-item" :class="`${chosen === idx ? 'active' : ''}`">
+      <div v-for="(items, idx) in pics" :key="idx" class="carousel-item" :class="`${chosen === idx ? 'active' : ''}`">
         <img :src="pics[idx]" alt="background" class="bd-placeholder-img" width="100%" height="90vh">
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>{{ `${items[7]} ${items[4]} ${items[5]}` }}</h1>
-            <p>{{ `Customer: ${items[1]}, VIN: ${items[6]}` }}</p>
+            <h1>Example headline.</h1>
+            <p>Some representative placeholder content for the first slide of the carousel.</p>
           </div>
         </div>
       </div>

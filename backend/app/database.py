@@ -3,16 +3,16 @@ import psycopg2
 class CarMaintenanceService:
 
     def __init__(self):
-        self.conn = psycopg2.connect(database="CarMaintenanceService",
-                                user="postgres",
-                                password="postgres",
-                                host="127.0.0.1", port="5433")
+        # self.conn = psycopg2.connect(database="CarMaintenanceService",
+        #                         user="postgres",
+        #                         password="postgres"
+        #                         host="127.0.0.1", port="5433")
         
-        # conn = psycopg2.connect(database="postgres",
-        #                         user="noodlenickels",
-        #                         password="welcome29I",
-        #                         host="127.0.0.1", port="5432")
-        # print("Database connected successfully")
+        self.conn = psycopg2.connect(database="postgres",
+                                user="noodlenickels",
+                                password="welcome29I",
+                                host="127.0.0.1", port="5432")
+        print("Database connected successfully")
 
         self.cursor = self.conn.cursor()
         print("postgres connected successfully")
@@ -45,7 +45,7 @@ class CarMaintenanceService:
 
 
     def create_tabels(self):
-        with open('backend\\app\sql_scripts\create.sql', 'r') as f:
+        with open('app\sql_scripts\create.sql', 'r') as f:
             script = f.read()
             self.cursor.execute(script)
         print('tables created successfully')
@@ -76,13 +76,18 @@ class CarMaintenanceService:
         data = self.cursor.fetchall()
         return data
     
-    def get_column_names(self, table_name):
-        self.cursor.execute(f'''
-            SELECT *
-            FROM information_schema.columns
-            WHERE table_schema = 'public' AND table_name = '{table_name}';'''
-        )
-        columns = self.cursor.fetchall()
-        return columns
+    def add_service(self, values):
+        #len = int(self.cursor.execute('''select count(*) from services''')[0][0])
+        script = f'''INSERT INTO services VALUES ({values[0]}, '{values[1]}', '{values[2]}', {values[3]})'''
+        self.cursor.execute(script)
+        return 'OK'
 
+    def delete_service(self, id):
+        script = f'''DELETE FROM services WHERE service_id={id}'''
+        self.cursor.execute(script)
+        return 'OK'
 
+    def add_user(self, values):
+        script = f'''INSERT INTO users VALUES ({values[0]}, {values[1]}, '{values[2]}', '{values[3]}', {values[4]})'''
+        self.cursor.execute(script)
+        return 'OK'

@@ -1,8 +1,27 @@
 <script setup>
+import {onMounted, ref} from "vue";
 import store from '@/store/index';
-const signin = () =>{
-  store.commit('setPage', 'main')
+
+let login = '';
+let password = '';
+const auth = ref([]);
+
+onMounted(() => {
+  fetch(`http://127.0.0.1:5000/login`)
+      .then(response => response.json())
+      .then(data => {
+        auth.value = data;
+      })})
+
+const reg =  () => {
+  console.log(auth.value.length);
+      for (let i=0; i < auth.value.length; i++){
+          if (auth.value[i].indexOf(login) !== -1 && auth.value[i].indexOf(password) !== -1) store.commit('setRole', auth.value[i][2]);
+      }
+      console.log(store.state.role);
+      store.commit('setPage', 'main');
 }
+
 
 </script>
 
@@ -12,11 +31,11 @@ const signin = () =>{
       <h1 class="h3 mb-3 fw-normal mb-5">Please sign in</h1>
 
       <div class="form-floating w-25 mb-5">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input v-model="login" type="login" class="form-control" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Email address</label>
       </div>
       <div class="form-floating w-25 mb-5">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input v-model="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Password</label>
       </div>
 
@@ -26,7 +45,7 @@ const signin = () =>{
         </label>
       </div>
       <div class="w-15">
-        <button @click="signin" class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button @click="reg" class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
       </div>
 
       <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>

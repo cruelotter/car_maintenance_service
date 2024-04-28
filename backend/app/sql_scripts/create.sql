@@ -24,6 +24,7 @@ CREATE TABLE services (
     service_id integer,
     name text,
     description text,
+    cost integer,
  PRIMARY KEY(service_id)
 );
 

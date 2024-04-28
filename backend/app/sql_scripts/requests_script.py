@@ -2,8 +2,6 @@
 orders = """--sql
 select 
     a.appointment_id,
-    a.date,
-    a.time,
     c.name as customer_name,
     c.contact_information,
     v.vehicle_id,
