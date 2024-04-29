@@ -1,5 +1,5 @@
 -- 1 customers table
-create table customers (
+CREATE TABLE IF NOT EXISTS customers (
     customer_id integer,
     name text,
     contact_information text,
@@ -8,7 +8,7 @@ create table customers (
 );
 
 -- 2 vehicles table
-create table vehicles (
+CREATE TABLE IF NOT EXISTS vehicles (
     vehicle_id integer,
     make text,
     model text,
@@ -20,7 +20,7 @@ create table vehicles (
 );
 
 -- 3 Services
-CREATE TABLE services (
+CREATE TABLE IF NOT EXISTS services (
     service_id integer,
     name text,
     description text,
@@ -29,7 +29,7 @@ CREATE TABLE services (
 );
 
 -- 4 Appointments table
-CREATE TABLE appointments (
+CREATE TABLE IF NOT EXISTS appointments (
     appointment_id integer,
     date date,
     time text,
@@ -43,14 +43,14 @@ CREATE TABLE appointments (
 );
 
 -- 5 Technicians table ----------------------------------------Document-Oriented
-CREATE TABLE Technicians (
+CREATE TABLE IF NOT EXISTS Technicians (
     technician_id integer,
     name text,
     contact_information text,
  PRIMARY KEY(technician_id)
 );
 -- 6 Maintenance Records table
-CREATE TABLE maintenance_records (
+CREATE TABLE IF NOT EXISTS maintenance_records (
     record_id integer,
     vehicle_id integer,
     technician_id integer,
@@ -62,7 +62,7 @@ CREATE TABLE maintenance_records (
 );
 
 -- 7 Parts Inventory table
-CREATE TABLE parts_inventory (
+CREATE TABLE IF NOT EXISTS parts_inventory (
     part_id integer,
     name text,
     description text,
@@ -71,7 +71,7 @@ CREATE TABLE parts_inventory (
 );
 
 -- 8 Invoices table
-CREATE TABLE invoices (
+CREATE TABLE IF NOT EXISTS invoices (
     invoice_id integer,
     appointment_id integer,
     total_cost decimal,
@@ -81,7 +81,7 @@ CREATE TABLE invoices (
 );
 
 -- 9 Feedback/Ratings table
-CREATE TABLE feedback_ratings (
+CREATE TABLE IF NOT EXISTS feedback_ratings (
     feedback_id integer,
     customer_id integer,
     technician_id integer,
@@ -93,18 +93,18 @@ CREATE TABLE feedback_ratings (
 );
 
 -- 10 Warranty Information table
-CREATE TABLE warranty_information (
+CREATE TABLE IF NOT EXISTS warranty_information (
     warranty_id integer,
     vehicle_id integer,
     provider text,
     coverage_details text,
-    expiration_date textstamp,
+    expiration_date text,
  PRIMARY KEY(warranty_id),
     FOREIGN KEY (vehicle_id) REFERENCES vehicles(vehicle_id)
 );
 
 -- 11 Supplier Information table--------------------Document-Oriented
-CREATE TABLE supplier_information (
+CREATE TABLE IF NOT EXISTS supplier_information (
     supplier_id integer,
     name text,
     contact_information text,
@@ -113,7 +113,7 @@ CREATE TABLE supplier_information (
 );
 
 -- 12 Employee Information table-------------------Document-Oriented
-CREATE TABLE employee_information (
+CREATE TABLE IF NOT EXISTS employee_information (
     employee_id integer,
     name text,
     position text,
@@ -122,7 +122,7 @@ CREATE TABLE employee_information (
 );
 
 -- 13 Service Packages table ----------------------Document-Oriented
-CREATE TABLE service_packages (
+CREATE TABLE IF NOT EXISTS service_packages (
     package_id integer,
     name text,
     description text,
@@ -132,7 +132,7 @@ CREATE TABLE service_packages (
 );
 
 -- 14 Insurance Information table
-CREATE TABLE insurance_information (
+CREATE TABLE IF NOT EXISTS insurance_information (
     insurance_id integer,
     policy_number text,
     expiration_date date,
@@ -141,7 +141,7 @@ CREATE TABLE insurance_information (
 );
 
 -- 15 Payment Transactions table
-CREATE TABLE payment_transactions (
+CREATE TABLE IF NOT EXISTS payment_transactions (
     transaction_id integer,
     invoice_id integer,
     payment_date timestamp,
@@ -151,7 +151,8 @@ CREATE TABLE payment_transactions (
     FOREIGN KEY (invoice_id) REFERENCES Invoices(invoice_id)
 );
 
-create table users(
+-- 16
+CREATE TABLE IF NOT EXISTS users(
     user_id integer,
     technician_id integer,
     login text,
@@ -161,7 +162,8 @@ create table users(
     foreign key (technician_id) references technicians(technician_id)
 );
 
-create table users_relations(
+-- 17
+CREATE TABLE IF NOT EXISTS users_relations(
     id integer,
     subordinate integer,
     manager integer,
