@@ -68,6 +68,14 @@ def adduser():
         d = postgres_client.add_user([data[0], data[1], data[2], data[3], data[4]])
     return d
 
+@app.route('/addrelation', methods=['POST'])
+def addrelation():
+    if request.method == 'POST':
+        data = request.json
+        print(data)
+        d = postgres_client.add_relation([data[0], data[1], data[2]])
+    return d
+
 @app.route('/dashboards/total_revenue_per_month')
 def get_dashboard_revenue():
     data = postgres_client.get_dashboard_data(rs.total_revenue_per_month)

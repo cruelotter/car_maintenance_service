@@ -19,7 +19,7 @@ import store from '@/store/index';
     <OrderCustomer v-if="store.state.page === 'orders'" />
     <DashComponent v-if="store.state.page === 'dashboard-component'" />
     <UserRelations v-if="store.state.page === 'relations'" />
-    <RegisterUser v-if="store.state.page === 'register'" :relations="relations.value" />
+    <RegisterUser v-if="store.state.page === 'register'"/>
 
 </template>
 
