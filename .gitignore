@@ -1,4 +1,7 @@
+.idea
 backend\__pycache__
+backend\app\__pycache__
+backend\app\sql_scripts\__pycache__
 frontend\node_modules
 venv
-
+*.pyc

@@ -122,6 +122,7 @@ class CarMaintenanceService:
             COMMIT; '''
         self.cursor.execute(script)
         self.conn.commit()
+        self.create_user_with_role(values)
         return 'OK'
     
     def add_relation(self, values):
