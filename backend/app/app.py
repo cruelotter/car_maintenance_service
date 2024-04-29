@@ -38,6 +38,16 @@ def users():
     data = postgres_client.get_table_data('users')
     return data
 
+@app.route('/relations')
+def relations():
+    data = postgres_client.get_table_data('users_relations')
+    return data
+
+@app.route('/techs')
+def techs():
+    data = postgres_client.get_table_data('technicians')
+    return data
+
 @app.route('/addservice', methods=['POST'])
 def addservice():
     if request.method == 'POST':
@@ -97,13 +107,13 @@ def get_dashboard_orders():
 def check_credentials():
     users = postgres_client.get_table_data('users')
     print(users)
-    creds = [[item[2], item[3], item[4]] for item in users]
-    print(creds)
+    #creds = [[item[2], item[3], item[4]] for item in users]
+    #print(creds)
     # if creds[login] is not None:
     #     if creds[login][0] == passw:
     #         return creds[login][1]
     # return -1
-    return creds
+    return users
 
 
 # вот это надо переименовать !!!!!!

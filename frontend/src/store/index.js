@@ -5,7 +5,9 @@ export default new Vuex.Store({
     page: 'signin',
     dashId: 0,
     dashName: '',
-    role: 3
+    role: 3,
+    relations: [],
+    technicians: []
   },
 
   mutations: {
@@ -22,6 +24,12 @@ export default new Vuex.Store({
     },
     setRole(state, role){
       state.role = role;
+    },
+    setRelations(state, relations){
+      state.relations = relations;
+    },
+    setTech(state, technicians){
+      state.technicians = technicians;
     }
   }
 });

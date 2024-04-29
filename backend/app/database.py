@@ -88,6 +88,9 @@ class CarMaintenanceService:
         return 'OK'
 
     def add_user(self, values):
-        script = f'''INSERT INTO users VALUES ({values[0]}, {values[1]}, '{values[2]}', '{values[3]}', {values[4]})'''
+        script = f'''BEGIN;
+            INSERT INTO technicians VALUES ({values[0]}, '{' '.join(map(str, values[2].split('_')))}', '{values[2]}.example.com');
+            insert into users values ({values[0]}, {values[1]}, '{values[2]}', '{values[3]}', {values[4]});
+            COMMIT; '''
         self.cursor.execute(script)
         return 'OK'

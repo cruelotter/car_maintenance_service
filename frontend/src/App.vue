@@ -8,8 +8,9 @@ import DashComponent from './pages/DashComponent';
 import UserRelations from './pages/UserRelations';
 import RegisterUser from './pages/RegisterUser';
 
-import store from '@/store/index';
 
+import store from '@/store/index';
+  
 </script>
 <template>
     <SignIn v-if="store.state.page === 'signin'" />
@@ -18,7 +19,7 @@ import store from '@/store/index';
     <OrderCustomer v-if="store.state.page === 'orders'" />
     <DashComponent v-if="store.state.page === 'dashboard-component'" />
     <UserRelations v-if="store.state.page === 'relations'" />
-    <RegisterUser v-if="store.state.page === 'register'" />
+    <RegisterUser v-if="store.state.page === 'register'" :relations="relations.value" />
 
 </template>
 

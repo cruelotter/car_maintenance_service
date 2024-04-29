@@ -10,17 +10,17 @@ onMounted(() => {
   fetch(`http://127.0.0.1:5000/login`)
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         auth.value = data;
       })})
 
 const reg =  () => {
-  console.log(auth.value.length);
       for (let i=0; i < auth.value.length; i++){
-          if (auth.value[i].indexOf(login) !== -1 && auth.value[i].indexOf(password) !== -1) store.commit('setRole', auth.value[i][2]);
+          if (auth.value[i].indexOf(login) !== -1 && auth.value[i].indexOf(password) !== -1) {store.commit('setRole', auth.value[i][4]); store.commit('setPage', 'main'); return}
       }
-      console.log(store.state.role);
-      store.commit('setPage', 'main');
-}
+      alert("Wrong user data")
+    }
+      
 
 
 </script>
@@ -48,7 +48,7 @@ const reg =  () => {
         <button @click="reg" class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
       </div>
 
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+      <p class="mt-5 mb-3 text-muted">&copy; 2022–2024</p>
     </form>
   </main>
 </template>
